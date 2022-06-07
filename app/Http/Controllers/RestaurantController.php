@@ -17,8 +17,16 @@ class RestaurantController extends Controller
         ], 200);
     }
 
-    public function adminAddRestaurant()
+    public function adminAddRestaurant(Request $request)
     {
+        $restaurant = new Restaurant;
+        $restaurant -> name = $request -> name;
+        $restaurant -> description = $request -> description;
+        $restaurant -> save();
+
+        return response()->json([
+            "status" => "Success",
+        ], 200);
     }
 
     public function getRestaurants()
