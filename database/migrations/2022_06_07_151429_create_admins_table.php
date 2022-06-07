@@ -11,8 +11,7 @@ class CreateAdminsTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up(){
         Schema::create('admins', function (Blueprint $table) {
             // Auto-incrementing UNSIGNED(+) INTEGER (primary key) equivalent column.          
             $table->increments('admin_id');
