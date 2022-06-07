@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\test;
+use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,27 +18,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 //******* ADMIN *******\\
-Route::get('/admin/users', []); // get all users
+Route::get('/admin/users', [UserController::class, "adminGetUsers"]); // get all users
 
-Route::get('/admin/restaurants', []); // get all restaurants
-Route::put('/admin/restaurant', []); // add a restaurant
+Route::get('/admin/restaurants', [RestaurantController::class, "adminGetRestaurants"]); // get all restaurants
+Route::put('/admin/restaurant', [RestaurantController::class], "adminAddRestaurant"); // add a restaurant
 
-Route::get('/admin/reviews', []); // get all pending reviews
-Route::patch('/admin/review/{id}', []);  // update review status
+Route::get('/admin/reviews', [ReviewController::class], "adminGetReviews"); // get all pending reviews
+Route::patch('/admin/review/{id}', [ReviewController::class], "adminUpdateReview");  // update review status
 //*********************\\
 
 
 //******** USER *******\\
-Route::get('/user/{id}', []); // get one user
-Route::patch('/user', []); // update a user
+Route::get('/user/{id}', [UserController::class], "getUser"); // get one user
+Route::patch('/user', [UserController::class], "updateUser"); // update a user
 
-Route::get('/restaurants', []); // get all restaurants
+Route::get('/restaurants', [RestaurantController::class], "getRestaurants"); // get all restaurants
 
-Route::get('/reviews', []); // get accepted restaurant reviews
-Route::put('/review', []); // add new review
+Route::get('/reviews', [ReviewController::class], "getReviews"); // get accepted restaurant reviews
+Route::put('/review', [ReviewController::class], "addReview"); // add new review
 
-Route::put('/user', []); // sign up
-Route::post('/user', []); // login
+Route::put('/user', [UserController::class], "addUser"); // sign up
+Route::post('/user', [UserController::class], "loginUser"); // login
 //*********************\\
 
 /**
