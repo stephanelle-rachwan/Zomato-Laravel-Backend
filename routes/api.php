@@ -34,7 +34,7 @@ Route::patch('/user', [UserController::class, "updateUser"]); // update a user
 
 Route::get('/restaurants', [RestaurantController::class, "getRestaurants"]); // get all restaurants
 
-Route::get('/reviews', [ReviewController::class, "getReviews"]); // get accepted restaurant reviews
+Route::get('/reviews/{rest_id}', [ReviewController::class, "getReviews"]); // get accepted restaurant reviews
 Route::put('/review', [ReviewController::class, "addReview"]); // add new review
 
 Route::put('/user', [UserController::class, "addUser"]); // sign up

@@ -13,7 +13,8 @@ class ReviewController extends Controller
         $reviews = DB::table('reviews')
             ->join('users', 'users.user_id', '=', 'reviews.user_id')
             ->join('restaurants', 'restaurants.restaurant_id', '=', 'reviews.restaurant_id')
-            ->select('reviews.content', 'reviews.status', 'reviews.rating', 'users.email', 'restaurants.name')
+            ->select('reviews.content', 'reviews.status', 'reviews.rating', 'users.email', 'restaurants.name', 'reviews.review_id')
+            ->where('reviews.status', '=', 2) //returning only pending reviews
             ->get();
         return response()->json([
             "status" => "Success",
@@ -23,14 +24,28 @@ class ReviewController extends Controller
 
     public function adminUpdateReview()
     {
-
+        $review_id = $request->review_id;
+        $affectedRows = User::where("review_id", "=", $review_id)->update([
+            "status" => $request->status,
+        ]);
+        return response()->json([
+            "status1" => "success",
+            "affected_rows" => $affectedRows
+        ], 200);
     }
 
-    public function getReviews()
+    public function getReviews($rest_id)
     {
+        $reviews = Review::where('restaurant_id', '=', $rest_id)
+        ->where('status', '!=', 2)
+        ->get();
+        return response()->json([
+            "status" => "Success",
+            "reviews" => $reviews
+        ], 200);
 
     }
-    
+
     public function addReview(Request $request)
     {
         $review = new Review;
