@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,9 @@ use App\Http\Controllers\ReviewController;
 */
 
 //******* ADMIN *******\\
+Route::post('/admin', [AdminController::class, "adminLogin"]); // admin login
+Route::put('/admin', [AdminController::class, "addAdmin"]); // admin signup
+
 Route::get('/admin/users', [UserController::class, "adminGetUsers"]); // get all users
 
 Route::get('/admin/restaurants', [RestaurantController::class, "adminGetRestaurants"]); // get all restaurants
