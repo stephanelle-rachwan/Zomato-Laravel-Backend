@@ -22,9 +22,9 @@ class ReviewController extends Controller
         ], 200);
     }
 
-    public function adminUpdateReview(Request $request)
+    public function adminUpdateReview(Request $request, $id)
     {
-        $review_id = $request->review_id;
+        $review_id = $id;
         $affectedRows = Review::where("review_id", "=", $review_id)->update([
             "status" => $request->status,
         ]);
