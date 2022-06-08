@@ -37,24 +37,23 @@ class ReviewController extends Controller
     public function getReviews($rest_id)
     {
         $reviews = Review::where('restaurant_id', '=', $rest_id)
-        ->where('status', '!=', 2)
-        ->get();
+            ->where('status', '=', 1)
+            ->get();
         return response()->json([
             "status" => "Success",
             "reviews" => $reviews
         ], 200);
-
     }
 
     public function addReview(Request $request)
     {
         $review = new Review;
-        $review -> content = $request -> content;
-        $review -> status = $request -> status;
-        $review -> rating = $request -> rating;
-        $review -> restaurant_id = $request -> restaurant_id;
-        $review -> user_id = $request -> user_id;
-        $review -> save();
+        $review->content = $request->content;
+        $review->status = $request->status;
+        $review->rating = $request->rating;
+        $review->restaurant_id = $request->restaurant_id;
+        $review->user_id = $request->user_id;
+        $review->save();
 
         return response()->json([
             "status" => "Success",
